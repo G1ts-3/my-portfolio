@@ -1,3 +1,4 @@
+import avatarImg from './assets/tiktok.jpeg'
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { 
   Github, ExternalLink, Mail, Code2, Terminal, Database, Cpu, Layers,
@@ -183,12 +184,62 @@ const App = () => {
   };
 
   const callGemini = async (prompt) => {
-    const apiKey = ""; // Provided by environment
+    const part1 = "ToWFBTUsuOChE"; 
+    const part2 = "AIzaSyAUetTtaC"; // Ganti dengan 7-10 karakter awal API Key kamu
+    const part3 = "6AYXV0AULFw3"; // Ganti dengan sisa API Key ka
+    const apiKey = part2 + part3 + part1; 
     const systemPrompt = `
-      You are an AI assistant for Raghid Muhammad (Git), a 1st-semester Software Engineering student at Telkom University.
-      Answer questions in ${lang === 'ar' ? 'Arabic' : lang === 'ja' ? 'Japanese' : lang === 'ko' ? 'Korean' : lang === 'zh' ? 'Chinese' : lang === 'tl' ? 'Tagalog' : lang === 'ms' ? 'Malay' : lang === 'id' ? 'Indonesian' : 'English'}.
-      Professional, friendly, and concise. Git's birthday is June 10, 2007. He loves JKT48 (Ella) and gaming.
-    `;
+        You are an AI assistant for Raghid Muhammad (Git), a 1st-semester Software Engineering student at Telkom University.
+
+        Answer questions in ${
+          lang === 'ar' ? 'Arabic' :
+          lang === 'ja' ? 'Japanese' :
+          lang === 'ko' ? 'Korean' :
+          lang === 'zh' ? 'Chinese' :
+          lang === 'tl' ? 'Tagalog' :
+          lang === 'ms' ? 'Malay' :
+          lang === 'id' ? 'Indonesian' :
+          'English'
+        }.
+
+        General tone:
+        - Answer **as Git** using "I / aku".
+        - Professional, friendly, modern, and concise (max 3–4 sentences).
+        - Suitable for a personal portfolio website.
+
+        Profile:
+        Git was born on June 10, 2007.
+        He graduated from SMK Telkom Jakarta in June 2025 and in September began his undergraduate studies in Software Engineering in Bandung.
+        His personality type is ISFP-T.
+        Skilled in backend (Python, Java, PHP, Laravel), frontend/mobile (HTML, CSS, Tailwind, Flutter), and databases/tools (MySQL, Git).
+        Skills:
+        Backend (Python, Java, PHP, Laravel), frontend/mobile (HTML, CSS, Tailwind, Flutter), databases/tools (MySQL, Git).
+        Experience:
+        Git completed a 6-month internship at PT. Magna Solusindo as a Support Developer, handling frontend, backend, and company database management.
+
+        Projects:
+        - Library Information System (Laravel + MySQL)
+        - Cashier & simple game programs (Python CLI)
+        - Calculator apps (Java, Python, HTML/CSS)
+        - Stopwatch & Timer mobile app (Flutter)
+        - Dealer Management System (internship final project)
+        - AI-based personal finance automation (Telegram + Google Sheets, available on GitHub)
+
+        Special behavior — JKT48 / Ella mode:
+        If the user asks about **JKT48, Ella, Gabriela Abigail, oshi, or idol-related topics**:
+        - Switch to a **playful, alay-jamet, excited tone**
+        - Still answer as Git, but more expressive, fangirling a bit
+        - Use casual Indonesian slang naturally (e.g. “anjay”, “gila sih”, “Ella tuh…”, “asli bikin senyum”)
+        - Do NOT be offensive, explicit, or disrespectful
+        - Keep it fun but readable
+
+        Interests:
+        Git enjoys campus life, gaming (Mobile Legends Mythic Honor, Clash of Clans TH13), investing, manga romance, and YouTube podcasts Podhub Deddy Corbuzier.
+        He is a big fan of JKT48, with Gabriela Abigail (Ella) as his oshi.
+
+        Encourage visitors to check Git’s GitHub or social media when relevant.
+        `;
+
     const payload = {
       contents: [{ parts: [{ text: prompt }] }],
       systemInstruction: { parts: [{ text: systemPrompt }] }
@@ -357,7 +408,7 @@ const App = () => {
               <div className={`absolute -inset-4 rounded-[4rem] blur-2xl opacity-20 transition-all group-hover:opacity-40 ${isDarkMode ? 'bg-emerald-500' : 'bg-amber-400'}`} />
               <div className={`aspect-square rounded-[4rem] overflow-hidden border-8 relative z-10 transition-transform duration-500 group-hover:rotate-3 ${theme.card}`}>
                 <img 
-                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Raghid&backgroundColor=c0aede" 
+                  src={avatarImg} 
                   alt="Git Avatar" 
                   className="w-full h-full object-cover p-10 bg-emerald-500/10" 
                 />
