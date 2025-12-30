@@ -94,7 +94,7 @@ const App = () => {
     const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
     link.type = 'image/jpeg';
     link.rel = 'icon';
-    link.href = './src/assets/tiktok.jpeg';
+    link.href = './main/src/assets/tiktok.jpeg';
     document.getElementsByTagName('head')[0].appendChild(link);
 
     return () => window.removeEventListener('scroll', handleScroll);
@@ -116,7 +116,7 @@ const App = () => {
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
   const profile = {
-    avatar: "./src/assets/tiktok.jpeg",
+    avatar: "./main/src/assets/tiktok.jpeg",
     name: "Raghid Muhammad",
     role: "Software Engineering Student",
     email: "raghidmuhammad3@gmail.com",
@@ -418,7 +418,7 @@ const App = () => {
                 <div className="relative group shrink-0">
                   <div className="absolute inset-0 bg-emerald-500 blur-[40px] opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
                   <div className={`w-56 h-56 md:w-96 md:h-96 rounded-[3rem] md:rounded-[4rem] overflow-hidden border-4 md:border-8 relative z-10 transition-all duration-500 cursor-pointer hover:scale-105 hover:rotate-3 hover:border-emerald-500 ${isDarkMode ? 'border-slate-900 shadow-2xl' : 'border-white shadow-xl'}`}>
-                    <img src="./src/assets/tiktok.jpeg" alt="Raghid" className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700" />
+                    <img src="./main/src/assets/tiktok.jpeg" alt="Raghid" className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700" />
                   </div>
                 </div>
               </FadeInSection>
