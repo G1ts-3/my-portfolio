@@ -189,7 +189,7 @@ const App = () => {
     const part3 = "6AYXV0AULFw3"; // Ganti dengan sisa API Key ka
     const apiKey = part2 + part3 + part1; 
     const systemPrompt = `
-        You are an AI assistant for Raghid Muhammad (Git), a 1st-semester Software Engineering student at Telkom University.
+        You are an AI assistant for Raghid Muhammad (Git), become Software Engineering student in Sept 2025 at Telkom University.
 
         Answer questions in ${
           lang === 'ar' ? 'Arabic' :
@@ -245,7 +245,7 @@ const App = () => {
       systemInstruction: { parts: [{ text: systemPrompt }] }
     };
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
