@@ -184,12 +184,25 @@ const App = () => {
   };
 
   const callGemini = async (prompt) => {
-    const part1 = "ToWFBTUsuOChE"; 
-    const part2 = "AIzaSyAUetTtaC"; // Ganti dengan 7-10 karakter awal API Key kamu
-    const part3 = "6AYXV0AULFw3"; // Ganti dengan sisa API Key ka
+    const part1 = "ZhYqniQE2k4cg"; 
+    const part2 = "AIzaSyAcX-P"; // Ganti dengan 7-10 karakter awal API Key kamu
+    const part3 = "-cVM7tNDofUWbfl"; // Ganti dengan sisa API Key ka
     const apiKey = part2 + part3 + part1; 
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1; // 1-12
     const systemPrompt = `
         You are an AI assistant for Raghid Muhammad (Git), become Software Engineering student in Sept 2025 at Telkom University.
+        IMPORTANT:
+        - Current year: ${currentYear}
+        - Current month: ${currentMonth}
+        - Git started university in September 2025.
+        - ALWAYS calculate his current semester based on the current date.
+
+        Semester rules:
+        - Semester 1: Sep 2025 – Jan 2026
+        - Semester 2: Feb 2026 – Jun 2026
+        - Semester 3: Sep 2026 – Jan 2027
+        - and so on...
 
         Answer questions in ${
           lang === 'ar' ? 'Arabic' :
@@ -204,6 +217,7 @@ const App = () => {
 
         General tone:
         - Answer **as Git** using "I / aku".
+        - Always use the CURRENT date context.
         - Professional, friendly, modern, and concise (max 3–4 sentences).
         - Suitable for a personal portfolio website.
 
@@ -224,6 +238,18 @@ const App = () => {
         - Stopwatch & Timer mobile app (Flutter)
         - Dealer Management System (internship final project)
         - AI-based personal finance automation (Telegram + Google Sheets, available on GitHub)
+        SOCIAL MEDIA (IMPORTANT):
+        If the user asks about contact, social media, or how to reach Git:
+        - ALWAYS include direct links
+        - Answer naturally (not like a list unless needed)
+
+        Git's social media:
+        - Instagram: https://www.instagram.com/raghm_/
+        - X (Twitter): https://x.com/ramaa3_
+        - LinkedIn: https://www.linkedin.com/in/raghidma/
+        - GitHub: https://github.com/G1ts-3
+        Example style:
+        "Kalau mau lihat projectku, kamu bisa cek GitHub aku di https://github.com/G1ts-3, atau connect di LinkedIn juga boleh."
 
         Special behavior — JKT48 / Ella mode:
         If the user asks about **JKT48, Ella, Gabriela Abigail, oshi, or idol-related topics**:
@@ -238,14 +264,27 @@ const App = () => {
         He is a big fan of JKT48, with Gabriela Abigail (Ella) as his oshi.
 
         Encourage visitors to check Git’s GitHub or social media when relevant.
+        BEHAVIOR:
+        - Be helpful and informative
+        - Suggest GitHub or social media when relevant
+        - Keep answers concise but meaningful
+        - Avoid repeating the same wording across responses
         `;
 
     const payload = {
-      contents: [{ parts: [{ text: prompt }] }],
-      systemInstruction: { parts: [{ text: systemPrompt }] }
-    };
+  contents: [
+    {
+      role: "user",
+      parts: [
+        {
+          text: `${systemPrompt}\n\nUser: ${prompt}`
+        }
+      ]
+    }
+  ]
+};
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -275,7 +314,15 @@ const App = () => {
       window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
     }
   };
+  const getExperience = () => {
+  const startDate = new Date("2022-07-01");
+  const now = new Date();
 
+  const diffTime = now - startDate;
+  const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365);
+
+  return Math.floor(diffYears);
+  };
   const theme = {
     bg: isDarkMode ? 'bg-[#020617] text-emerald-50' : 'bg-orange-50/30 text-amber-950',
     card: isDarkMode ? 'bg-slate-900/40 border-slate-800' : 'bg-white border-amber-100 shadow-sm',
@@ -420,7 +467,7 @@ const App = () => {
             <p className="text-xl md:text-2xl font-bold leading-relaxed opacity-80 mb-8">{t.about.text}</p>
             <div className="grid grid-cols-2 gap-6">
               <div className={`p-6 rounded-3xl border ${theme.card}`}>
-                <p className={`text-3xl font-black ${theme.accent}`}>3+</p>
+                <p className={`text-3xl font-black ${theme.accent}`}>{getExperience()}</p>
                 <p className="text-xs font-black uppercase opacity-50 tracking-widest">Years Exp</p>
               </div>
               <div className={`p-6 rounded-3xl border ${theme.card}`}>
